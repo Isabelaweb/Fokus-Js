@@ -2,8 +2,10 @@ const taskListContainer = document.querySelector('.app__section-task-list')
 const formTask = document.querySelector('.app__form-add-task')
 const toggleFormTaskBtn = document.querySelector('.app__button--add-task')
 const formLabel = document.querySelector('.app__form-label')
-const cancel = document.querySelector('.app__form-footer__button--cancel')
-const deleted = document.querySelector('.app__form-footer__button--delete')
+const btnCancel = document.querySelector('.app__form-footer__button--cancel')
+const btnDeleted = document.querySelector('.app__form-footer__button--delete')
+const bntDeletedAll = document.querySelector('.btn-remover-todas')
+const btnDeletarConcluidas = document.querySelector('#btn-remover-concluidas')
 const textArea = document.querySelector('.app__form-textarea')
 const localStorageTarefas = localStorage.getItem('tarefas')
 const taskAtiveDescription = document.querySelector('.app__section-active-task-description')
@@ -155,13 +157,26 @@ formTask.addEventListener('submit', (evento) => {
     updateLocalStorage()
 })
 
-cancel.addEventListener('click', () => {
+btnCancel.addEventListener('click', () => {
     formTask.classList.add('hidden')
     textArea.value = ''
 })
 
-deleted.addEventListener('click', () => {
-    textArea.value = ''
+btnDeleted.addEventListener('click', () => {
+    if(tarefaSelecionada){
+        const index = tarefas.indexOf(tarefaSelecionada) 
+
+        if(index !=-1){
+            tarefas.slice(index, 1)
+        }
+        itemTarefaSelecionada.remove()
+        tarefas.filter(t=> t!= tarefaSelecionada)
+        itemTarefaSelecionada = null
+        tarefaSelecionada = null
+    }
+
+    updateLocalStorage()
+    limparForm()
 })
 
 
@@ -174,3 +189,5 @@ document.addEventListener('TarefaFinalizada', function (e) {
         updateLocalStorage()
     } 
 })
+
+
