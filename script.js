@@ -17,7 +17,7 @@ const musicaPause = new Audio('/sons/pause.mp3')
 const musicaStop = new Audio('/sons/beep.mp3')
 
 musica.loop = true
-let tempoDecorridoEmSegundos = 3
+let tempoDecorridoEmSegundos = 1500
 let intervaloId = null
 
 musicaFocoInput.addEventListener('change', () => {
